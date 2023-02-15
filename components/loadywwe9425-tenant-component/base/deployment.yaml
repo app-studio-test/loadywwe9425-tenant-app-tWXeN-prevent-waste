@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: loadywwe9425-tenant-component
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: loadywwe9425-tenant-component
+    app.kubernetes.io/part-of: loadywwe9425-tenant-app
+  name: loadywwe9425-tenant-component
+  namespace: loadywwe9425-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devfile-dotnet-deploy
+      app.kubernetes.io/instance: loadywwe9425-tenant-component
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: devfile-dotnet-deploy
+        app.kubernetes.io/instance: loadywwe9425-tenant-component
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images:67b051596b4540ab81cf7ce1cb62084d
+        imagePullPolicy: Always
+        name: main
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
+status: {}
